@@ -4,7 +4,7 @@
 
 ## 安装包
 
-安装包 **UIM_Project_Installer.exe** 在 bin 文件夹下，双击即可启动安装。
+安装包 **UIM_Project_Installer.exe** 在 **bin** 文件夹下，双击即可启动安装。
 
 ## 软件界面
 
