@@ -8,9 +8,17 @@
 
 ## 软件界面
 
-| 主界面 | 图表设置对话框 |
-|--------|----------------|
-| ![主界面](documents/images/界面1.png) | ![图表设置](documents/images/界面2.png) |
+<div align="center">
+    <img src="documents/images/界面1.png" alt="主界面">
+    <p><em>主界面 - 控制器配置、轴控制、实时数据显示</em></p>
+</div>
+
+<div align="center">
+    <img src="documents/images/界面2.png" alt="图表设置">
+    <p><em>图表设置对话框 - 传感器与IO口配置</em></p>
+</div>
+
+
 
 > 以上截图来自实际运行环境，界面可能因版本更新略有差异。
 
