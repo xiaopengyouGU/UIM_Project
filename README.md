@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # UIM_Project – 超声塑化注塑机控制软件
 
 基于 **Qt 6** 开发的超声塑化注塑机控制软件，提供实时曲线显示、运动控制等核心功能。
@@ -172,3 +173,4 @@ cmake --install . --prefix D:/UIM_Project
 ## 许可证
 
 本项目基于 **GNU General Public License (GPL)** 开源，详细条款请见项目中的 `LICENSE` 文件。
+
