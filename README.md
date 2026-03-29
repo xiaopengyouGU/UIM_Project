@@ -191,4 +191,3 @@ cmake --install . --prefix D:/UIM_Project
 ## 许可证
 
 本项目基于 **GNU General Public License (GPL)** 开源，详细条款请见项目中的 `LICENSE` 文件。
-

@@ -24,7 +24,7 @@ public:
 
     void addData(int channel, float target, float actual);                     // 添加数据（使用当前时间戳）
     void addData(int channel, float target, float actual, qint64 timestamp);   // 添加数据（指定时间戳）
-    void addData(QList<ChannelData> dataNum);                               // 直接添加通道数据
+    void addData(const QList<ChannelData>& dataNum);                           // 直接添加通道数据,采用Qt隐式共享机制
     // 获取指定时间范围内的原始数据
     void getData(int channel, qint64 startTime, qint64 endTime, QList<float>& targetOut, QList<float>& actualOut, QList<qint64>& timeOut);
     //获取处理后的数据点数组，用于更新曲线序列，效率超高

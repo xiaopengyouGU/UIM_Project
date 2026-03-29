@@ -58,7 +58,7 @@ public:
     QChart* getChart() const;
     void addData(int ch, float target, float actual);
     void addData(int channel, float target, float actual, qint64 timestamp);
-    void addData(QList<ChannelData> dataNum);               // 添加一批数据
+    void addData(const QList<ChannelData>& dataNum);         // 添加一批数据
     void importData(const QString& fileName);
     void exportData(const QString& fileName, qint64 startTime, qint64 endTime);
     void updateData();
@@ -69,7 +69,7 @@ signals:
     void dataExport(const QString& fileName, qint64 startTime, qint64 endTime);
     void addDataToStorage(int ch, float target, float actual);
     void addDataToStorage(int ch, float target, float actual, qint64 timestamp);
-    void addDataToStorage(QList<ChannelData> dataNum);
+    void addDataToStorage(const QList<ChannelData>& dataNum);
 
 private slots:
     void do_XRangeChanged(qreal min, qreal max);

@@ -24,7 +24,7 @@ public:
 
     // 公开给 DataStorage 调用的函数
     void addData(int ch, float target, float actual, qint64 timestamp);
-    void addData(QList<ChannelData> dataNum);
+    void addData(const QList<ChannelData>& dataNum);
     void getData(int ch, qint64 startTime, qint64 endTime, QList<float>& targetOut, QList<float>& actualOut, QList<qint64>& timeOut);
     //获取处理后的数据点数组，用于更新曲线序列，效率超高
     QList<QPointF>* getPointNum(int ch, qint64 viewStart, qint64 viewEnd, bool isAbs, bool isTarget, int threshold);
@@ -101,7 +101,7 @@ void DataStorage::Private::addData(int channel, float target, float actual, qint
     _addData(channel, target, actual, timestamp);
 }
 
-void DataStorage::Private::addData(QList<ChannelData> dataNum)
+void DataStorage::Private::addData(const QList<ChannelData>& dataNum)
 {
     QWriteLocker locker(&m_rwLock);   // 写锁
     //检查数据格式是否正确，约定传入的数据没有环形缓冲区
@@ -427,8 +427,8 @@ void DataStorage::addData(int channel, float target, float actual, qint64 timest
     pimpl->addData(channel, target, actual, timestamp);
 }
 
-void DataStorage::addData(QList<ChannelData> dataNum)
-{   //dataNum传递过程采用隐式优化，只读的情况下（同一线程）只进行引用计数，不做深拷贝
+void DataStorage::addData(const QList<ChannelData>& dataNum)
+{   //dataNum传递过程采用隐式共享，只读的情况下（同一线程）只进行引用计数，不做深拷贝
     pimpl->addData(dataNum);
 }
 

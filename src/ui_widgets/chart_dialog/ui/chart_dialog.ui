@@ -14,8 +14,8 @@
    <string>图表控制器</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="img.qrc">
-    <normaloff>:/icon/images/LTM.ico</normaloff>:/icon/images/LTM.ico</iconset>
+   <iconset resource="../img.qrc">
+    <normaloff>:/icon/images/icon.ico</normaloff>:/icon/images/icon.ico</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
@@ -337,7 +337,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="img.qrc"/>
+  <include location="../img.qrc"/>
  </resources>
  <connections/>
 </ui>

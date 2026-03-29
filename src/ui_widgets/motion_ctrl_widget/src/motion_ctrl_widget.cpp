@@ -48,7 +48,7 @@ void MotionCtrlWidget::buildUI_Chart()
     //绑定信号与槽
     connect(chart_manager, &ChartManager::exportDataFinished, this, &MotionCtrlWidget::do_exportFinished);
     //启动图表管理器
-    chart_manager->setPeriod(150);                           //设置图表刷新周期：150ms
+    chart_manager->setPeriod(120);                           //设置图表刷新周期：150ms
     //chart_manager->setPeriod(200);
     chart_manager->start();
 }

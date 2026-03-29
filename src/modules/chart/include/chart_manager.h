@@ -61,7 +61,7 @@ public:
     // 数据操作相关接口
     void addData(int channel, float target, float actual);  // 添加一个数据
     void addData(int channel, float target, float actual, qint64 timestamp);
-    void addData(QList<ChannelData> dataNum);               // 添加一批数据
+    void addData(const QList<ChannelData>& dataNum);        // 添加一批数据
     void importData(const QString& fileName);               // 导入数据, 会覆盖原始数据，请先保存
     void exportData(const QString& fileName, qint64 startTime, qint64 endTime);
     void updateData();                                      // 用户可以手动更新数据

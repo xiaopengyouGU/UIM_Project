@@ -27,7 +27,7 @@ ChartManager::Private::Private(int channelCount, ChartManager *parent)
     if(channelCount < 1 || channelCount > MAX_CHANNEL_NUMS) 
             m_count = DEFUALT_CHANNEL_NUMS;
     else    m_count = channelCount; 
-    
+
     buildChart();
     buildData();
     buildTimer();
@@ -127,7 +127,7 @@ void ChartManager::Private::buildData()
     connect(m_exporter, &DataExporter::exportFinished, this, &Private::do_exportFinished);
     connect(this, qOverload<int,float,float>(&Private::addDataToStorage), m_storage, qOverload<int,float,float>(&DataStorage::addData));
     connect(this, qOverload<int,float,float,qint64>(&Private::addDataToStorage), m_storage, qOverload<int,float,float,qint64>(&DataStorage::addData));
-    connect(this, qOverload<QList<ChannelData>>(&Private::addDataToStorage), m_storage, qOverload<QList<ChannelData>>(&DataStorage::addData));
+    connect(this, qOverload<const QList<ChannelData>&>(&Private::addDataToStorage), m_storage, qOverload<const QList<ChannelData>&>(&DataStorage::addData));
 }
 
 void ChartManager::Private::buildTimer()
@@ -136,7 +136,7 @@ void ChartManager::Private::buildTimer()
     m_timer = new QTimer(this);
     m_timer->stop();
     m_timer->setInterval(m_period);
-    m_timer->setTimerType(Qt::CoarseTimer);         //此处没有更新周期约150ms即可，不用太准+-5%
+    m_timer->setTimerType(Qt::CoarseTimer);         //此处没有更新周期约100ms即可，不用太准+-5%
     m_timer->setSingleShot(false);
     connect(m_timer, &QTimer::timeout, this, &Private::updateData);
 
@@ -299,7 +299,7 @@ void ChartManager::Private::addData(int ch, float target, float actual, qint64 t
     emit addDataToStorage(ch, target, actual, timestamp);          //内部发送信号
 }
 
-void ChartManager::Private::addData(QList<ChannelData> dataNum)                           //添加一批数据
+void ChartManager::Private::addData(const QList<ChannelData>& dataNum)                           //添加一批数据
 {
     if(!dataNum.size())     return;         //空数据直接返回
     emit addDataToStorage(dataNum);          //内部发送信号
@@ -546,8 +546,8 @@ void ChartManager::Private::processTasksParallel(const QList<SeriesTask>& tasks,
     // 标记更新开始
     //m_taskStarted++;
     m_isUpdating = true;
-    // 使用 QtConcurrent::mapped 并行执行
     QFuture<SeriesResult> future = QtConcurrent::mapped(tasks, [this](const SeriesTask& task) -> SeriesResult {
+    
         // 在工作线程中调用 DataStorage 获取点列表
         QList<QPointF>* points = m_storage->getPointNum(task.channel, task.viewStart, task.viewEnd,
                                                         task.isAbs, task.isTarget, task.threshold,
@@ -631,7 +631,7 @@ int ChartManager::getMode() const               { return pimpl->getMode(); }
 QChart* ChartManager::getChart() const          { return pimpl->getChart(); }
 void ChartManager::addData(int ch, float target, float actual) { pimpl->addData(ch, target, actual); }
 void ChartManager::addData(int ch, float target, float actual, qint64 timestamp) {pimpl->addData(ch, target, actual, timestamp);}
-void ChartManager::addData(QList<ChannelData> dataNum) { pimpl->addData(dataNum);}
+void ChartManager::addData(const QList<ChannelData>& dataNum) { pimpl->addData(dataNum);}
 void ChartManager::importData(const QString& fileName) { pimpl->importData(fileName); }
 void ChartManager::exportData(const QString& fileName, qint64 startTime, qint64 endTime) { pimpl->exportData(fileName, startTime, endTime); }
 void ChartManager::updateData()                 { pimpl->updateData(); }
